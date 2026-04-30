@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import type { MouseEvent } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Header } from './components/Header';
 import { MoodGrid } from './components/MoodGrid';
@@ -26,8 +25,8 @@ function App() {
   };
 
   useEffect(() => {
-    window.addEventListener('mousemove', handleMouseMove as any);
-    return () => window.removeEventListener('mousemove', handleMouseMove as any);
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   const handleGenerate = async () => {

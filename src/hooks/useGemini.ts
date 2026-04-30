@@ -70,13 +70,13 @@ export const useGemini = () => {
 
       // Strip potential markdown fences
       let jsonString = rawText.trim();
-      if (jsonString.startsWith('\`\`\`json')) {
+      if (jsonString.startsWith('```json')) {
         jsonString = jsonString.slice(7);
       }
-      if (jsonString.startsWith('\`\`\`')) {
+      if (jsonString.startsWith('```')) {
         jsonString = jsonString.slice(3);
       }
-      if (jsonString.endsWith('\`\`\`')) {
+      if (jsonString.endsWith('```')) {
         jsonString = jsonString.slice(0, -3);
       }
       jsonString = jsonString.trim();

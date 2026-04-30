@@ -19,13 +19,13 @@ export const MoodOrb = ({ mood, isSelected, hasSelection, onSelect }: MoodOrbPro
       variants={orbVariants}
       onClick={() => onSelect(mood.id)}
       
-      className={\`
+      className={`
         liquid-glass group flex flex-col items-center justify-center p-6 gap-3 
         transition-all duration-300 relative
-        \${hasSelection && !isSelected ? 'opacity-40 scale-95' : 'hover:scale-[1.08]'}
-        \${isSelected ? \`scale-[1.12] !bg-orange-500 !border-orange-600 shadow-orange-500/50 glow-pulse\` : ''}
-      \`}
-      style={{ animation: !isSelected ? 'floatOrb 4s ease-in-out infinite' : 'none', animationDelay: \`\${Math.random() * 0.5}s\` }}
+        ${hasSelection && !isSelected ? 'opacity-40 scale-95' : 'hover:scale-[1.08]'}
+        ${isSelected ? `scale-[1.12] !bg-orange-500 !border-orange-600 shadow-orange-500/50 glow-pulse` : ''}
+      `}
+      style={{ animation: !isSelected ? 'floatOrb 4s ease-in-out infinite' : 'none', animationDelay: `${(mood.id.charCodeAt(0) % 5) * 0.1}s` }}
     >
       <motion.div
         className="text-4xl md:text-5xl"
@@ -34,7 +34,7 @@ export const MoodOrb = ({ mood, isSelected, hasSelection, onSelect }: MoodOrbPro
       >
         {mood.emoji}
       </motion.div>
-      <span className={\`font-medium tracking-wide \${isSelected ? 'text-white' : 'text-slate-900'}\`}>
+      <span className={`font-medium tracking-wide ${isSelected ? 'text-white' : 'text-slate-900'}`}>
         {mood.label}
       </span>
       {isSelected && (

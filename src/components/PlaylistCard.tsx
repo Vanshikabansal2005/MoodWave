@@ -64,8 +64,8 @@ export const PlaylistCard = ({ song, index }: PlaylistCardProps) => {
               key={i}
               className="w-1.5 rounded-t-sm bg-orange-400"
               style={{
-                height: `${Math.random() * 100}%`,
-                animation: `waveBar ${0.5 + Math.random()}s ease-in-out infinite alternate`
+                height: `${(i * 23 + 45) % 100}%`,
+                animation: `waveBar ${0.5 + ((i * 0.3) % 0.5)}s ease-in-out infinite alternate`
               }}
             />
           ))}
