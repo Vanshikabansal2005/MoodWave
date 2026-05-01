@@ -4,6 +4,7 @@ import { Header } from './components/Header';
 import { MoodGrid } from './components/MoodGrid';
 import { LoadingPulse } from './components/LoadingPulse';
 import { PlaylistView } from './components/PlaylistView';
+import { Chatbot } from './components/Chatbot';
 import { MOODS } from './utils/moodConfig';
 import { useGemini } from './hooks/useGemini';
 import type { PlaylistResponse } from './types';
@@ -13,7 +14,7 @@ function App() {
   const [screen, setScreen] = useState<0 | 1 | 2>(0); // 0: Selection, 1: Loading, 2: Results
   const [selectedMoodId, setSelectedMoodId] = useState<string | null>(null);
   const [playlist, setPlaylist] = useState<PlaylistResponse | null>(null);
-  
+
   const { generatePlaylist, error } = useGemini();
 
   const selectedMood = MOODS.find(m => m.id === selectedMoodId) || MOODS[0];
@@ -32,9 +33,9 @@ function App() {
   const handleGenerate = async () => {
     if (!selectedMoodId) return;
     setScreen(1);
-    
+
     const result = await generatePlaylist(selectedMood.label);
-    
+
     if (result) {
       setPlaylist(result);
       setScreen(2);
@@ -53,7 +54,7 @@ function App() {
   return (
     <div className="min-h-screen mesh-bg relative selection:bg-orange-500/30 font-sans">
       <div className="cursor-glow hidden md:block" />
-      
+
       <main className="container mx-auto px-4 py-12 md:py-24 relative z-10 flex flex-col min-h-screen">
         <AnimatePresence mode="wait">
           {screen === 0 && (
@@ -66,14 +67,14 @@ function App() {
               className="flex flex-col flex-1"
             >
               <Header />
-              
+
               <div className="flex-1 flex flex-col items-center justify-center w-full">
                 <MoodGrid
                   moods={MOODS}
                   selectedMoodId={selectedMoodId}
                   onSelectMood={setSelectedMoodId}
                 />
-                
+
                 <div className="mt-16 h-20">
                   <AnimatePresence>
                     {selectedMoodId && (
@@ -134,6 +135,9 @@ function App() {
           )}
         </AnimatePresence>
       </main>
+
+      {/* Floating Chatbot — available on all screens */}
+      <Chatbot />
     </div>
   );
 }
